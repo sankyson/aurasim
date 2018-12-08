@@ -10,6 +10,5 @@
 #include <QDebug>
 #include <QtMath>
 #include <QImage>
-#include <QImageReader>
 
 #endif // DEFINES_H

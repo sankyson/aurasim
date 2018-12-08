@@ -13,8 +13,9 @@ class Arduino : public QProcess
     Q_OBJECT
 public:
     explicit Arduino(QObject *parent = nullptr);
-     ~Arduino();
+     ~Arduino() override;
     void initConnection();
+
     Q_PROPERTY(QList<int> anaVals READ anaVals NOTIFY anaValsChanged)
     Q_PROPERTY(QList<int> digVals READ digVals NOTIFY digValsChanged)
     Q_PROPERTY(QList<int> pinModVals READ pinModVals NOTIFY pinModValsChanged)

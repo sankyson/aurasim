@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "../widgets/playground.h"
+#include "workspacewidget.h"
 
 class MainWindow : public QMainWindow
 {
@@ -10,14 +10,13 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     void initUI();
-    void initConnections();
 
 signals:
 
 public slots:
 
 private:
-    QSharedPointer<Playground> mPlaground;
+    QSharedPointer<WorkspaceWidget> mWorkspace;
 };
 
 #endif // MAINWINDOW_H

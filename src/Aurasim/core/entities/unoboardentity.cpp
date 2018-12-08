@@ -65,9 +65,7 @@ void UnoBoardEntity::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
         painter->setPen(pen);
         painter->drawRect(boundingRect());
     }
-
     painter->drawImage(boundingRect(), mDrawImg);
-    emit tick();
 }
 
 void UnoBoardEntity::timerEvent(QTimerEvent *event)

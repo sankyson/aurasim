@@ -13,7 +13,6 @@ class UnoBoardEntity: public Entity
 
 public:
     UnoBoardEntity(QGraphicsItem* parent= nullptr);
-
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 

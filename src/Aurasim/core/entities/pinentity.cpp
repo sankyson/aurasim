@@ -50,8 +50,6 @@ void PinEntity::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
         painter->setPen(pen);
         painter->drawRect(boundingRect());
     }
-
-    emit tick();
 }
 
 void PinEntity::setPinMode(const int &mode)

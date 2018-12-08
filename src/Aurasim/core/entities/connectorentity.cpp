@@ -2,9 +2,14 @@
 #include <QPen>
 #include <QPainter>
 #include <QDebug>
+#include <QPolygonF>
+#include <QtMath>
+#include <QStyleOptionGraphicsItem>
 
 
-ConnectorEntity::ConnectorEntity(QGraphicsItem *parent, PinEntity* start, PinEntity* end): Entity (parent)
+ConnectorEntity::ConnectorEntity(QGraphicsItem *parent, PinEntity* start, PinEntity* end):
+    Entity (parent),
+    mLineWidth(10)
 {
     if(start->pinMode() == 0){
         mInputPin = start;
@@ -33,29 +38,52 @@ ConnectorEntity::ConnectorEntity(QGraphicsItem *parent, PinEntity* start, PinEnt
 
 QRectF ConnectorEntity::boundingRect() const
 {
-    QPointF gap = mOutputPin->pos() - mInputPin->pos();
-    qreal w, h;
-    w = qAbs(gap.x()) + 6;
-    h = qAbs(gap.y()) + 6;
-
-    return QRectF( -w / 2 - 3, -h / 2 - 3, w, h);
+    return shape().boundingRect();
 }
-
 
 void ConnectorEntity::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     Q_UNUSED(widget)
-
     QPen pen;
-    pen.setWidth(2);
-    QColor drawColor(40, 255, 20);
+    pen.setCapStyle(Qt::RoundCap);
+    pen.setWidth(mLineWidth / 2);
+    QColor drawColor(180, 180, 180);
+    if(option->state & QStyle::State_MouseOver || option->state & QStyle::State_Selected)
+        drawColor.setRgb(255, 255, 255);
+
     pen.setColor(drawColor);
     painter->setPen(pen);
-    painter->drawLine(mInputPin->scenePos() - this->pos(), mOutputPin->scenePos() - this->pos());
+
+    painter->drawLine(mOutputPin->scenePos() - this->scenePos(), mInputPin->scenePos() - this->scenePos());
+
+//    painter->fillPath(shape(), drawColor);
+}
+
+QPainterPath ConnectorEntity::shape() const
+{
+    QPainterPath path;
+
+    qreal k = (mOutputPin->scenePos().y() - mInputPin->scenePos().y()) / (mOutputPin->scenePos().x() - mInputPin->scenePos().x());
+    qreal dk = - 1.0 / k;
+    qreal r = mLineWidth  / 2;
+    qreal dx = qSqrt(qAbs(((r * r) / (1 + dk * dk))));
+
+    QPointF p1 = mOutputPin->scenePos() - this->scenePos() + QPointF(dx, dk * dx);
+    QPointF p2 = mOutputPin->scenePos() - this->scenePos() + QPointF(-dx, dk * -dx);
+    QPointF p3 = mInputPin->scenePos() - this->scenePos() + QPointF(dx, dk * dx);
+    QPointF p4 = mInputPin->scenePos() - this->scenePos() + QPointF(-dx, dk * -dx);
+
+    QPolygonF polygon;
+    polygon << p1 << p2 << p4 << p3;
+    path.addPolygon(polygon);
+    return path;
 }
 
 void ConnectorEntity::timerEvent(QTimerEvent *event)
 {
+    QPointF pos = mInputPin->scenePos() + (mOutputPin->scenePos() - mInputPin->scenePos()) / 2;
+    setPos(pos);
+//    prepareGeometryChange();
     mInputPin->setPinVal(mOutputPin->pinVal());
     QObject::timerEvent(event);
 }

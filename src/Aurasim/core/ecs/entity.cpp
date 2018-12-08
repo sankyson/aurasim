@@ -4,7 +4,7 @@
 
 Entity::Entity(QGraphicsItem *parent) : QGraphicsObject(parent)
 {
-    setFlags(ItemIsSelectable | ItemIsMovable);
+    setFlags(ItemIsSelectable | ItemIsMovable | ItemClipsToShape);
     setAcceptHoverEvents(true);
     setAcceptedMouseButtons(Qt::LeftButton);
     setAcceptDrops(true);

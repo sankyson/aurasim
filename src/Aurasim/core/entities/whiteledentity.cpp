@@ -15,11 +15,6 @@ WhiteLedEntity::WhiteLedEntity(QGraphicsItem *parent): Entity (parent),
     initConnections();
 }
 
-void WhiteLedEntity::initConnections()
-{
-    connect(mInputPin.data(), &PinEntity::pinValChanged, this, &WhiteLedEntity::setValue);
-}
-
 void WhiteLedEntity::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     Q_UNUSED(widget)
@@ -55,4 +50,9 @@ QRectF WhiteLedEntity::boundingRect() const
     int w = 100;
     int h = 40;
     return QRectF(-w / 2, -h / 2, w, h);
+}
+
+void WhiteLedEntity::initConnections()
+{
+    connect(mInputPin.data(), &PinEntity::pinValChanged, this, &WhiteLedEntity::setValue);
 }

@@ -9,9 +9,9 @@ class ConnectorEntity : public Entity
     Q_OBJECT
 public:
     ConnectorEntity(QGraphicsItem* parent = nullptr, PinEntity* start = nullptr, PinEntity* end = nullptr);
-
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+    QPainterPath shape() const override;
 
 public slots:
 
@@ -21,6 +21,7 @@ protected:
 private:
     PinEntity* mInputPin;
     PinEntity* mOutputPin;
+    int mLineWidth;
 };
 
 #endif // CONNECTORENTITY_H

@@ -42,6 +42,4 @@ void RoundPinEntity::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
         painter->setPen(pen);
         painter->drawEllipse(boundingRect());
     }
-
-    emit tick();
 }

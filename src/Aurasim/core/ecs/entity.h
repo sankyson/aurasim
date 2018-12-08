@@ -11,19 +11,20 @@ class Entity : public QGraphicsObject
     Q_OBJECT
 public:
     explicit Entity(QGraphicsItem *parent = nullptr);
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+    QPainterPath shape() const override;
+
     ComponentList components();
+
     int id();
     void setID(const int& id);
     bool isValid();
     void addComponent(QSharedPointer<Component> com);
-    QPainterPath shape() const override;
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 
 signals:
     void selected(Entity* entity);
     void diselected(Entity* entiy);
     void scenePosChanged();
-    void tick();
 
 public slots:
 

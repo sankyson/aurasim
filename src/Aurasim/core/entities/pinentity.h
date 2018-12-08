@@ -8,9 +8,9 @@ class PinEntity : public Entity
     Q_OBJECT
 public:
     PinEntity(QGraphicsItem* parent = nullptr);
-
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+
     const int& pinMode(){return mPinMode;}
     const int& pinVal(){return mPinVal;}
     void resetState();

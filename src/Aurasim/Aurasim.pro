@@ -22,7 +22,6 @@ SOURCES += \
     core/ecs/system.cpp \
     core/ecs/entitymanager.cpp \
     core/views/mainwindow.cpp \
-    core/widgets/playground.cpp \
     core/entities/spotentity.cpp \
     core/ecs/systemmanager.cpp \
     core/entities/unoboardentity.cpp \
@@ -33,7 +32,9 @@ SOURCES += \
     core/entities/whiteledentity.cpp \
     core/entities/groundentity.cpp \
     core/chips/arduino.cpp \
-    core/systems/circuitsimsystem.cpp
+    core/systems/circuitsimsystem.cpp \
+    core/aurasim.cpp \
+    core/views/workspacewidget.cpp
 
 RESOURCES += qml.qrc \
     res.qrc
@@ -55,7 +56,6 @@ HEADERS += \
     core/ecs/system.h \
     core/ecs/entitymanager.h \
     core/views/mainwindow.h \
-    core/widgets/playground.h \
     core/global/defines.h \
     core/entities/spotentity.h \
     core/ecs/systemmanager.h \
@@ -67,7 +67,9 @@ HEADERS += \
     core/entities/whiteledentity.h \
     core/entities/groundentity.h \
     core/chips/arduino.h \
-    core/systems/circuitsimsystem.h
+    core/systems/circuitsimsystem.h \
+    core/aurasim.h \
+    core/views/workspacewidget.h
 
 DISTFILES +=
 

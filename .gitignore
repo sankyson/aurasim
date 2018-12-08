@@ -2,6 +2,3 @@
 ino.*
 serv.*
 build/
-!build/seruino
-!build/sketch.ino
-!build/Aurasim
